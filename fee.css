@@ -1,0 +1,284 @@
+/* ===========================
+   fee.css — cleaned & responsive
+   Replace your existing fee.css with this
+   =========================== */
+
+/* Reset & sensible defaults */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #fff; color: #222; }
+
+/* ---------- Header (fixed) ---------- */
+:root {
+  --header-bg: #6cc7e8;
+  --header-padding-vertical: 18px;
+  --header-padding-horizontal: 20px;
+  --header-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--header-bg);
+  padding: var(--header-padding-vertical) var(--header-padding-horizontal);
+  z-index: 1000;
+  box-shadow: var(--header-shadow);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start; /* logo at left, buttons at right using margin-left:auto */
+}
+
+/* Logo (H1 inside anchor) and subtitle (H4) */
+header > a { text-decoration: none; display: inline-block; }
+#logo {
+  margin: 0;
+  color: red;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  padding-left: 6px;
+}
+#logo2 {
+  margin: 4px 0 0 6px;
+  font-size: 14px;
+  color: #0033cc;
+  font-weight: 600;
+}
+
+/* Buttons container */
+.button {
+  margin-left: auto;           /* push to right */
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+/* Individual nav buttons */
+.button .btnn {
+  background: transparent;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  font-weight: 700;
+  flex-wrap: nowrap;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform .15s ease, color .15s ease;
+}
+.button .btnn:hover,
+.button .btnn:focus {
+  color: orange;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* subtle divider line under header (optional visual) */
+#line {
+  display: none; /* keep hidden by default; header already has background */
+}
+
+/* ---------- Layout: main area ---------- */
+/* Give space so content isn't hidden behind fixed header */
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: calc(96px + 8px) 20px 40px; /* top padding to offset the fixed header */
+  box-sizing: border-box;
+}
+
+/* Override bootstrap .container behavior a little */
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Page heading */
+#heading {
+  color: yellowgreen;
+  font-family: Roboto, Arial, sans-serif;
+  margin: 6px 0 16px;
+  font-size: 1.1rem;
+}
+
+/* ---------- Notifications list ---------- */
+#notifications {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+/* individual notification item */
+#notifications li {
+  background: #f8f9fa;
+  margin: 10px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+  box-shadow: none;
+  word-break: break-word; /* avoid overflow for long text */
+}
+
+/* hover style for desktop/tablet */
+#notifications li:hover {
+  background: #e9f3ff;
+  transform: translateX(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+/* footer inside the .container (not page footer) */
+.footer {
+  font-size: 14px;
+  color: #444;
+  padding: 8px 0;
+  text-align: center;
+}
+
+/* ---------- small fixes & accessibility ---------- */
+button { font-family: inherit; }
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width: 992px) {
+  #logo { font-size: 28px; }
+  #logo2 { font-size: 13px; }
+  main { padding-top: calc(96px + 8px); }
+}
+
+/* ---------- Mobile: stack header, scrollable nav, full-bleed notifications ---------- */
+@media (max-width: 1130px) {
+  /* Header becomes stacked */
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 12px;
+    gap: 8px;
+  }
+
+  /* center logo and subtitle */
+  header > a, #logo2 {
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  #logo { font-size: 28px; padding-left: 0; }
+  #logo2 { font-size: 14px; margin-top: 6px; }
+
+  /* Buttons become a horizontally scrollable row that occupies full width */
+  .button {
+    width: 100%;
+    padding: 8px 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+  .button::-webkit-scrollbar { height: 6px; }
+  .button::-webkit-scrollbar-thumb { background: #ccc; border-radius: 6px; }
+
+  /* Make the page container full width (so we can do full-bleed items) */
+  .container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /*
+    Make notifications "full-bleed" (edge-to-edge) while remaining in document flow.
+    margin-left/right with calc(50% - 50vw) shifts the element to align with viewport edges.
+  */
+  #notifications li {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 14px 18px;
+    border-radius: 0;
+  }
+
+  /* On mobile keep hover simpler (box-shadow + background) */
+  #notifications li:hover {
+    transform: none;
+    background: #e9f3ff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  /* Reduce top padding so main fits nicely */
+  main {
+    padding-top: calc(120px + 8px); /* space for stacked header */
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* optional: tablet larger full-bleed breakpoint (if you want) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* you can add tablet-specific adjustments here if needed */
+}
+/* ===== BUTTON ALIGNMENT & HEADER FIX ===== */
+
+/* Keep header same on desktop */
+@media (min-width: 1025px) {
+  header {
+    width: 100%;
+    position: relative;
+  }
+}
+
+/* Align buttons in a single line on all devices */
+#notifications button,
+.btn-group button {
+  display: inline-block;
+  margin: 5px;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  vertical-align: middle;
+}
+
+/* ===== HEADER FIX ===== */
+
+/* Keep header same for desktop view */
+@media (min-width: 1025px) {
+  header {
+    width: 100%;
+    position: relative;
+  }
+}
+
+/* Mobile view: make header buttons stay in one line */
+@media (max-width: 1024px) {
+  header nav {
+    display: flex;
+    flex-wrap: nowrap;          /* keep buttons in a single line */
+    overflow-x: auto;           /* enable horizontal scrolling if buttons overflow */
+    -webkit-overflow-scrolling: touch; /* smooth scrolling for mobile */
+    gap: 10px;
+    padding: 10px 0;
+    scrollbar-width: none;      /* hide scrollbar in Firefox */
+  }
+
+  header nav::-webkit-scrollbar {
+    display: none;              /* hide scrollbar in Chrome/Safari */
+  }
+
+  header nav a,
+  header nav button {
+    flex: 0 0 auto;             /* prevent buttons from shrinking */
+    white-space: nowrap;        /* keep text in one line */
+  }
+}
+
+#send{
+  text-align: center;
+}
