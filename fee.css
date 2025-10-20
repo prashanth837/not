@@ -282,3 +282,9 @@ button { font-family: inherit; }
 #send{
   text-align: center;
 }
+#contactForm{
+  padding-top:160px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
