@@ -344,10 +344,11 @@ footer.footer {
   font-size: 14px;
 }
 
-
-
-
 }
+.footer{
+ position: fixed;
+}
+
 
 @media (max-width:1500px){
   #why{

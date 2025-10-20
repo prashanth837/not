@@ -283,7 +283,7 @@ button { font-family: inherit; }
   text-align: center;
 }
 #contactForm{
-  padding-top:160px;
+  padding-top:100px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -294,5 +294,15 @@ button { font-family: inherit; }
 }
 #heading{
   text-align: center;
+}
+#contactForm{
+  padding-top:120px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.footer{
+  position: fixed;
+  padding-bottom:0%;
+  margin-top: auto;
 }
 }
